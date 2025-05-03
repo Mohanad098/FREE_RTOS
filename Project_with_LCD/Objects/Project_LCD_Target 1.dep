@@ -1,6 +1,6 @@
 Dependencies for Project 'Project_LCD', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6190000::V6.19::ARMCLANG
-F (.\main.c)(0x68161026)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/main.o -MD)
+F (.\main.c)(0x681696EE)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/main.o -MD)
 I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\11.2.0\Source\include\FreeRTOS.h)(0x67E518F8)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stddef.h)(0x63888F58)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63888F58)
@@ -34,22 +34,9 @@ I (..\Project_with_LCD\GPIO.h)(0x68160D2C)
 I (..\Project_with_LCD\Platform_Types.h)(0x65381FA0)
 I (..\Project_with_LCD\Common_Macros.h)(0x680D05CD)
 I (..\Project_with_LCD\tm4c123gh6pm.h)(0x680BBE7F)
-I (..\Project_with_LCD\MCAL.h)(0x68160E88)
+I (..\Project_with_LCD\MCAL.h)(0x681688D2)
 I (..\Project_with_LCD\HAL.h)(0x68160768)
 I (..\Project_with_LCD\LCD_I2C.h)(0x680F76BA)
-F (.\retarget.c)(0x67DE8A20)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/retarget.o -MD)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x63888F58)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123\TM4C123.h)(0x530EE4E6)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123\TM4C123GH6PM.h)(0x550FD41C)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\core_cm4.h)(0x664C1ED8)
-I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63888F58)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_version.h)(0x664C1ED8)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_compiler.h)(0x664C1ED8)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\cmsis_armclang.h)(0x664C1ED8)
-I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x63888F58)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\m-profile\cmsis_armclang_m.h)(0x664C1ED8)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include\m-profile\armv7m_mpu.h)(0x664C1ED8)
-I (C:\Users\Honda\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123\system_TM4C123.h)(0x51B6C7E6)
 F (.\GPIO.c)(0x68160E09)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/gpio.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\assert.h)(0x63888F58)
 I (..\Project_with_LCD\GPIO.h)(0x68160D2C)
@@ -57,7 +44,7 @@ I (..\Project_with_LCD\Platform_Types.h)(0x65381FA0)
 I (..\Project_with_LCD\Common_Macros.h)(0x680D05CD)
 I (..\Project_with_LCD\tm4c123gh6pm.h)(0x680BBE7F)
 F (.\MCAL.c)(0x681608D0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/mcal.o -MD)
-I (..\Project_with_LCD\MCAL.h)(0x68160E88)
+I (..\Project_with_LCD\MCAL.h)(0x681688D2)
 I (..\Project_with_LCD\HAL.h)(0x68160768)
 I (..\Project_with_LCD\GPIO.h)(0x68160D2C)
 I (..\Project_with_LCD\Platform_Types.h)(0x65381FA0)
@@ -106,7 +93,7 @@ F (.\hw_types.h)(0x67DE8A20)()
 F (.\Platform_Types.h)(0x65381FA0)()
 F (.\tm4c123gh6pm.h)(0x680BBE7F)()
 F (.\HAL.h)(0x68160768)()
-F (.\MCAL.h)(0x68160E88)()
+F (.\MCAL.h)(0x681688D2)()
 F (.\LCD_I2C.h)(0x680F76BA)()
 F (C:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Source/clib_os.c)(0x67C84064)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -w -I ../Project_with_LCD-I./RTE/RTOS-I./RTE/_Target_1-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/CMSIS/RTOS2/FreeRTOS/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS-FreeRTOS/11.2.0/Source/portable/GCC/ARM_CM4F-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/RTOS2/Include-IC:/Users/Honda/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123-D__UVISION_VERSION="538" -D_RTE_ -DTM4C123GH6PM -D_RTE_-o ./objects/clib_os.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63888F58)

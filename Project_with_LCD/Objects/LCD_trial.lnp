@@ -1,6 +1,5 @@
 --cpu=Cortex-M4.fp.sp
 ".\objects\main.o"
-".\objects\retarget.o"
 ".\objects\gpio.o"
 ".\objects\mcal.o"
 ".\objects\hal.o"

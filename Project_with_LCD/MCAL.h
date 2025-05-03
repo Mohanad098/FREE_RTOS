@@ -4,16 +4,16 @@
 #define MCAL_H
 
 /* Control vars */
-#define JAM						(uint8) 0
-#define DRIVER_UP			(uint8) 1
-#define DRIVER_DOWN		(uint8) 2
-#define PASS_UP				(uint8) 3
-#define PASS_DOWN			(uint8) 4
-#define LIMIT_UP			(uint8) 5
-#define LIMIT_DOWN		(uint8) 6
-#define LOCK					(uint8) 7
-#define UNLOCK				(uint8) 8
-#define WINDOW_STOP		(uint8) 9
+#define JAM						(uint8) 20
+#define DRIVER_UP			(uint8) 21
+#define DRIVER_DOWN		(uint8) 22
+#define PASS_UP				(uint8) 23
+#define PASS_DOWN			(uint8) 24
+#define LIMIT_UP			(uint8) 25
+#define LIMIT_DOWN		(uint8) 26
+#define LOCK					(uint8) 27
+#define UNLOCK				(uint8) 28
+#define WINDOW_STOP		(uint8) 29
 
 #define STOP					0x0
 #define CW						0x1

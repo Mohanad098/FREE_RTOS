@@ -16,6 +16,8 @@
 /* Global variables */
 volatile int32_t encoder_count = 0;
 uint8 control = 0;
+sint16 angle = 0;
+uint8 motor_revs = 0;
 
 /* Declaretions */
 #define PPR 11
@@ -47,6 +49,29 @@ void vPassengerUp(void *pvParameters);
 void vPassengerDown(void *pvParameters);
 void vJamming (void *pvParameters);
 void vLCD (void *pvParameters);
+
+void u8_to_str(uint8_t num, char *str) {
+    if (num == 0) {
+        str[0] = '0';
+        str[1] = '\0';
+        return;
+    }
+
+    int i = 0;
+    while (num > 0) {
+        str[i++] = (num % 10) + '0';
+        num /= 10;
+    }
+
+    str[i] = '\0';
+
+    // Reverse the string
+    for (int j = 0; j < i / 2; j++) {
+        char temp = str[j];
+        str[j] = str[i - j - 1];
+        str[i - j - 1] = temp;
+    }
+}
 
 int main(void)
 {
@@ -148,13 +173,13 @@ void vDriverUp(void *pvParameters)
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	portBASE_TYPE xStatus;
-	float angle = 0.0;
+
   while(1)
   {
 		xSemaphoreTake( xDriverUp, portMAX_DELAY );
 		control = DRIVER_UP;
 		M_MotorControl(CW);
-		vTaskDelayUntil( &xLastWakeTime, ( 100 / portTICK_RATE_MS ) );
+		vTaskDelayUntil( &xLastWakeTime, ( 50 / portTICK_RATE_MS ) );
 		if(M_Read(DRIVER_UP) && control != JAM) //button not pressed after 50ms
 		{
 			control = DRIVER_UP;
@@ -165,10 +190,10 @@ void vDriverUp(void *pvParameters)
 		{//Driver up button pressed - Limit switch not pressed - Driver down PB not pressed - didn't come from Jam
 			control = DRIVER_UP;
 			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send driver up to lcd
-			while (!M_Read(DRIVER_UP) && !M_Read(LIMIT_UP) && M_Read(DRIVER_DOWN) && control != JAM) // Button is pressed (because PULL-UP, pressed = 0)
+			while (!M_Read(DRIVER_UP) && !M_Read(LIMIT_UP) && M_Read(DRIVER_DOWN) && control != JAM && motor_revs!=10) // Button is pressed (because PULL-UP, pressed = 0)
 			{       
 				M_MotorControl(CW);
-				angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
+				//angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
 				//vPrintStringAndNumber("Motor angle = ",angle);
 			}
 			// Button not pressed
@@ -185,13 +210,13 @@ void vDriverDown(void *pvParameters)
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	portBASE_TYPE xStatus;
-	float angle = 0.0;
+
   while(1)
   {
 		xSemaphoreTake( xDriverDown, portMAX_DELAY );
     control = DRIVER_DOWN;
 		M_MotorControl(CCW);
-		vTaskDelayUntil( &xLastWakeTime, ( 100 / portTICK_RATE_MS ) );
+		vTaskDelayUntil( &xLastWakeTime, ( 50 / portTICK_RATE_MS ) );
 		if(M_Read(DRIVER_DOWN)) //button not pressed after 50ms
 		{
 			control = DRIVER_DOWN;
@@ -202,10 +227,10 @@ void vDriverDown(void *pvParameters)
 		{//Driver up button pressed - Limit switch not pressed - Driver down PB not pressed
 			control = DRIVER_DOWN;
 			xStatus = xQueueSendToBack( xQueue, &control, 0 );
-			while (!M_Read(DRIVER_DOWN) && !M_Read(LIMIT_DOWN) && M_Read(DRIVER_UP)) // Button is pressed (because PULL-UP, pressed = 0)
+			while (!M_Read(DRIVER_DOWN) && !M_Read(LIMIT_DOWN) && M_Read(DRIVER_UP) && motor_revs!=0) // Button is pressed (because PULL-UP, pressed = 0)
 			{       
 				M_MotorControl(CCW);
-				angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
+				//angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
 				//vPrintStringAndNumber("Motor angle = ",angle);
 			}
 			// Button not pressed
@@ -222,13 +247,13 @@ void vPassengerUp(void *pvParameters)
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	portBASE_TYPE xStatus;
-	float angle = 0.0;
+
   while(1)
   {
 		xSemaphoreTake( xPassengerUp, portMAX_DELAY );
 		control = PASS_UP;
 		M_MotorControl(CW);
-		vTaskDelayUntil( &xLastWakeTime, ( 100 / portTICK_RATE_MS ) );
+		vTaskDelayUntil( &xLastWakeTime, ( 50 / portTICK_RATE_MS ) );
 		if(M_Read(PASS_UP) && control != JAM) //button not pressed after 50ms
 		{
 			control = PASS_UP;
@@ -239,10 +264,10 @@ void vPassengerUp(void *pvParameters)
 		{//Driver up button pressed - Limit switch not pressed - Driver down PB not pressed - Not locked - didn't come from jam
 			control = PASS_UP;
 			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send passenger up to lcd
-			while (!M_Read(PASS_UP) && !M_Read(LIMIT_UP) && M_Read(PASS_DOWN) && M_Read(LOCK) && control != JAM) // Button is pressed (because PULL-UP, pressed = 0)
+			while (!M_Read(PASS_UP) && !M_Read(LIMIT_UP) && M_Read(PASS_DOWN) && M_Read(LOCK) && control != JAM && motor_revs!=10) // Button is pressed (because PULL-UP, pressed = 0)
 			{       
 				M_MotorControl(CW);
-				angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
+				//angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
 				//vPrintStringAndNumber("Motor angle = ",angle);
 			}
 			// Button not pressed
@@ -259,13 +284,13 @@ void vPassengerDown (void *pvParameters)
 	portTickType xLastWakeTime;
 	xLastWakeTime = xTaskGetTickCount();
 	portBASE_TYPE xStatus;
-	float angle = 0.0;
+	
   while(1)
   {
 		xSemaphoreTake( xPassengerDown, portMAX_DELAY );
 		control = PASS_DOWN;
 		M_MotorControl(CCW);
-		vTaskDelayUntil( &xLastWakeTime, ( 100 / portTICK_RATE_MS ) );
+		vTaskDelayUntil( &xLastWakeTime, ( 50 / portTICK_RATE_MS ) );
 		if(M_Read(PASS_DOWN)) //button not pressed after 50ms
 		{
 			control = PASS_DOWN;
@@ -276,10 +301,10 @@ void vPassengerDown (void *pvParameters)
 		{//Driver up button pressed - Limit switch not pressed - Driver down PB not pressed
 			control = PASS_DOWN;
 			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send passenger down to lcd
-			while (!M_Read(PASS_DOWN) && !M_Read(LIMIT_DOWN) && M_Read(PASS_UP) && M_Read(LOCK)) // Button is pressed (because PULL-UP, pressed = 0)
+			while (!M_Read(PASS_DOWN) && !M_Read(LIMIT_DOWN) && M_Read(PASS_UP) && M_Read(LOCK) && motor_revs!=0) // Button is pressed (because PULL-UP, pressed = 0)
 			{       
 				M_MotorControl(CCW);
-				angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
+				//angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
 				//vPrintStringAndNumber("Motor angle = ",angle);
 			}
 			// Button not pressed
@@ -313,8 +338,8 @@ void vJamming (void *pvParameters)
 
 void vLCD (void *pvParameters)
 {
-	uint8 uReceivedValue;
 	portBASE_TYPE xStatus;
+	uint8 uReceivedValue;
 	const portTickType xTicksToWait = 100 / portTICK_RATE_MS;
 	for(;;)
 	{
@@ -329,36 +354,57 @@ void vLCD (void *pvParameters)
 			/* Data was successfully received from the queue, print out the received
 			value. */
 			
-			switch(uReceivedValue)
+			if(uReceivedValue <= 10)
 			{
-				case JAM: 				
-					LCD_Clear();
-					LCD_Print("Obstacle detect");
-					break;
-				case DRIVER_UP: 	
-				case PASS_UP: 		
-					LCD_Clear();	
-					LCD_Print("Window up");
-					break;
-				case DRIVER_DOWN: 			
-				case PASS_DOWN: 	
-					LCD_Clear();
-					LCD_Print("Window down");
-					break;
-				case LIMIT_UP:    
-					LCD_Clear();
-					LCD_Print("Limit upwards");
-					break;
-				case LIMIT_DOWN: 	
-					LCD_Clear();
-					LCD_Print("Limit downwards");
-					break;
-				case WINDOW_STOP:
-					LCD_Clear();
-					LCD_Print("Window stop");
-					break;
-				default: //do nothing
-					break;
+				uint8 str[4] = {0}; 
+				u8_to_str(uReceivedValue*5, str); //convert to cm 1 rev -> 5 cm
+				LCD_SetCursor(1,0);
+				LCD_Print("Window at ");	
+				if(uReceivedValue*5 == 5)
+				{
+					LCD_SetCursor(1,11);
+					LCD_Print("05");
+				}
+				else
+				{
+					LCD_SetCursor(1,11);
+					LCD_Print(str);
+				}
+			}
+			
+			else
+			{
+				switch(uReceivedValue)
+				{
+					case JAM: 				
+						LCD_Clear();
+						LCD_Print("Obstacle detect");
+						break;
+					case DRIVER_UP: 	
+					case PASS_UP: 		
+						LCD_Clear();	
+						LCD_Print("Window up");
+						break;
+					case DRIVER_DOWN: 			
+					case PASS_DOWN: 	
+						LCD_Clear();
+						LCD_Print("Window down");
+						break;
+					case LIMIT_UP:    
+						LCD_Clear();
+						LCD_Print("Limit upwards");
+						break;
+					case LIMIT_DOWN: 	
+						LCD_Clear();
+						LCD_Print("Limit downwards");
+						break;
+					case WINDOW_STOP:
+						LCD_Clear();
+						LCD_Print("Window stop");
+						break;
+					default: //do nothing
+						break;
+				}
 			}
 		}
 		else
@@ -370,7 +416,16 @@ void vLCD (void *pvParameters)
 	}
 }
 
+
+
+/*********************************************** ISR ***********************************************/
+
+
+
+/* GPIO A handler, for encoder */
+
 void GPIOA_Handler(void) {
+	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
   if (GPIO_PORTA_RIS_R & (1 << Gpio_Pin2)) {
     uint8_t channelB = (GPIO_PORTA_DATA_R >> Gpio_Pin3) & 0x01;
     if (channelB)
@@ -378,7 +433,31 @@ void GPIOA_Handler(void) {
     else
       encoder_count--;
     GPIO_PORTA_ICR_R = (1 << Gpio_Pin2); // clear interrupt
+		// 600 = 1 rev
+		angle = (sint16) (((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0);
+		if(angle < 0)
+		{
+			angle = 0;
+			motor_revs = 0;
+			xTaskNotifyFromISR(xControlTaskHandle,LIMIT_DOWN,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
+		}
+		else if(angle > 6000)
+		{
+			motor_revs = 10;
+			xTaskNotifyFromISR(xControlTaskHandle,LIMIT_UP,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
+		}
+		else
+		{
+			motor_revs = angle / 600 ;
+		}
+		if(angle % 300 == 0)
+		{
+			xQueueSendFromISR(xQueue, &motor_revs, &xHigherPriorityTaskWoken);
+		}
+		
   }
+	// Yield if needed
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 void GPIOC_Handler(void) {
