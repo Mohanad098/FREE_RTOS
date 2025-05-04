@@ -159,6 +159,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>encoder_count,0x0A</ItemText>
         </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pressDuration,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <ScvdPack>
         <Filename>C:\Users\Honda\AppData\Local\Arm\Packs\ARM\CMSIS-FreeRTOS\11.2.0\CMSIS\RTOS2\FreeRTOS\FreeRTOS.scvd</Filename>
