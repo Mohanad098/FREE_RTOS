@@ -78,7 +78,6 @@ void u8_to_str(uint8_t num, char *str) {
 int main(void)
 {
 		M_Init();
-
 		/* Create semaphores */
 		vSemaphoreCreateBinary(xDriverUp);
 		vSemaphoreCreateBinary(xDriverDown);
@@ -103,8 +102,8 @@ int main(void)
 			xTaskCreate( vControlTask,"Control Task", configMINIMAL_STACK_SIZE, NULL,5,&xControlTaskHandle);
 			xTaskCreate( vDriverUp, "Driver upwards", 250, NULL, 3, &xDriverUpHandle );
 			xTaskCreate( vDriverDown, "Driver downwards", 250, NULL, 3, NULL );
-			xTaskCreate( vPassengerUp, "Passenger Up", 200, NULL, 3, &xPassengerUpHandle );
-			xTaskCreate( vPassengerDown, "Passenger Down", 200, NULL, 3, NULL );
+			xTaskCreate( vPassengerUp, "Passenger Up", 200, NULL, 2, &xPassengerUpHandle );
+			xTaskCreate( vPassengerDown, "Passenger Down", 200, NULL, 2, NULL );
 		  xTaskCreate( vJamming, "Jamming", 200, NULL, 4, NULL );
 			xTaskCreate( vLCD,	"Printing", configMINIMAL_STACK_SIZE, NULL, 4, NULL);
 			vTaskStartScheduler();
@@ -125,6 +124,7 @@ void vControlTask(void *pvParameters)
     BaseType_t control_t;
 		portBASE_TYPE xStatus;
 		LCD_Init();
+		LCD_Clear();
 		LCD_Print("Window control");
 		while (1) 
 		{
@@ -170,44 +170,7 @@ void vControlTask(void *pvParameters)
 /*
 Description: 
 */
-/*
-void vDriverUp(void *pvParameters)
-{
-	portTickType xLastWakeTime;
-	xLastWakeTime = xTaskGetTickCount();
-	portBASE_TYPE xStatus;
 
-  while(1)
-  {
-		xSemaphoreTake( xDriverUp, portMAX_DELAY );
-		control = DRIVER_UP;
-		M_MotorControl(CW);
-		vTaskDelayUntil( &xLastWakeTime, ( DEBOUNCING / portTICK_RATE_MS ) );
-		if(M_Read(DRIVER_UP) && control != JAM) //button not pressed after 50ms
-		{
-			control = DRIVER_UP;
-			M_MotorControl(CW);
-			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send driver up to lcd
-		}
-		else if (!M_Read(DRIVER_UP))
-		{//Driver up button pressed - Limit switch not pressed - Driver down PB not pressed - didn't come from Jam
-			control = DRIVER_UP;
-			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send driver up to lcd
-			while (!M_Read(DRIVER_UP) && !M_Read(LIMIT_UP) && M_Read(DRIVER_DOWN) && control != JAM && motor_revs!=10) // Button is pressed (because PULL-UP, pressed = 0)
-			{       
-				M_MotorControl(CW);
-				//angle = ((float)encoder_count / (PPR * GEAR_RATIO)) * 360.0;
-				//vPrintStringAndNumber("Motor angle = ",angle);
-			}
-			// Button not pressed
-			M_MotorControl(STOP);
-			control = WINDOW_STOP;
-			xStatus = xQueueSendToBack( xQueue, &control, 0 ); //send window stop to lcd
-		}
-    
-  }
-}
-*/
 
 void vDriverUp(void *pvParameters)
 {
@@ -536,7 +499,21 @@ void GPIOC_Handler(void) {
 void GPIOD_Handler(void)
 {
 	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-  if (GPIO_PORTD_RIS_R & (1 << Gpio_Pin6)) 
+	
+	if (GPIO_PORTD_RIS_R & (1 << Gpio_Pin2)) 
+	{	
+    GPIO_PORTD_ICR_R = (1 << Gpio_Pin2); // clear interrupt
+		xTaskNotifyFromISR(xControlTaskHandle,DRIVER_UP,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
+		//(Task to notify, Notification value, Overwrite previous value, )
+  }
+	
+	if (GPIO_PORTD_RIS_R & (1 << Gpio_Pin1)) 
+	{	
+    GPIO_PORTD_ICR_R = (1 << Gpio_Pin1); // clear interrupt
+		xTaskNotifyFromISR(xControlTaskHandle,DRIVER_DOWN,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
+		//(Task to notify, Notification value, Overwrite previous value, )
+  }
+  else if (GPIO_PORTD_RIS_R & (1 << Gpio_Pin6)) 
 	{	
     GPIO_PORTD_ICR_R = (1 << Gpio_Pin6); // clear interrupt
 		if(control == DRIVER_UP || control == PASS_UP)
@@ -554,25 +531,6 @@ void GPIOD_Handler(void)
 			//(Task to notify, Notification value, Overwrite previous value, )
 		}
 	}
-	// Yield if needed
-  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-}
-
-void GPIOF_Handler(void)
-{
-	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-  if (GPIO_PORTF_RIS_R & (1 << Gpio_Pin0)) 
-	{	
-    GPIO_PORTF_ICR_R = (1 << Gpio_Pin0); // clear interrupt
-		xTaskNotifyFromISR(xControlTaskHandle,DRIVER_UP,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
-		//(Task to notify, Notification value, Overwrite previous value, )
-  }
-	else if (GPIO_PORTF_RIS_R & (1 << Gpio_Pin4)) 
-	{	
-    GPIO_PORTF_ICR_R = (1 << Gpio_Pin4); // clear interrupt
-		xTaskNotifyFromISR(xControlTaskHandle,DRIVER_DOWN,eSetValueWithOverwrite,&xHigherPriorityTaskWoken);
-		//(Task to notify, Notification value, Overwrite previous value, )
-  }
 	// Yield if needed
   portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }

@@ -35,10 +35,10 @@ uint8 M_Read(uint8 device)
 	switch (device)
 	{
 		case DRIVER_UP:
-			return Port_ReadPin(Gpio_PortF,Gpio_Pin0);
+			return Port_ReadPin(Gpio_PortD,Gpio_Pin2);
 			break;
 		case DRIVER_DOWN:
-			return Port_ReadPin(Gpio_PortF,Gpio_Pin4);
+			return Port_ReadPin(Gpio_PortD,Gpio_Pin1);
 			break;
 		case PASS_UP:
 			return Port_ReadPin(Gpio_PortC,Gpio_Pin4);

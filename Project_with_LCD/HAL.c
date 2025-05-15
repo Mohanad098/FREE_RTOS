@@ -12,16 +12,18 @@ void H_Ports_Init(void)
 void H_PB_init(void)
 {
 	/* Driver Up */
-	Port_SetPinMode(Gpio_PortF, Gpio_Pin0, PORT_PIN_MODE_DIO); // SW2
-	Port_SetPinDirection(Gpio_PortF, Gpio_Pin0, PORT_PIN_IN);
-	Port_SetInternalResistor(Gpio_PortF, Gpio_Pin0, PULL_UP);
-	Port_EnableInterrupt(Gpio_PortF, Gpio_Pin0, EDGE_FALLING); // SW2
+	
+	Port_SetPinMode(Gpio_PortD, Gpio_Pin2, PORT_PIN_MODE_DIO);
+  Port_SetPinDirection(Gpio_PortD, Gpio_Pin2, PORT_PIN_IN);
+  Port_SetInternalResistor(Gpio_PortD, Gpio_Pin2, PULL_UP);
+  Port_EnableInterrupt(Gpio_PortD, Gpio_Pin2, EDGE_FALLING);
 	
 	/* Driver down */
-	Port_SetPinMode(Gpio_PortF, Gpio_Pin4, PORT_PIN_MODE_DIO); // SW1
-	Port_SetPinDirection(Gpio_PortF, Gpio_Pin4, PORT_PIN_IN);
-	Port_SetInternalResistor(Gpio_PortF, Gpio_Pin4, PULL_UP);
-	Port_EnableInterrupt(Gpio_PortF, Gpio_Pin4, EDGE_FALLING); // SW1
+	
+	Port_SetPinMode(Gpio_PortD, Gpio_Pin1, PORT_PIN_MODE_DIO); 
+	Port_SetPinDirection(Gpio_PortD, Gpio_Pin1, PORT_PIN_IN);
+	Port_SetInternalResistor(Gpio_PortD, Gpio_Pin1, PULL_UP);
+	Port_EnableInterrupt(Gpio_PortD, Gpio_Pin1, EDGE_FALLING); 
 	
 	/* Passenger Up */
 	Port_SetPinMode(Gpio_PortC, Gpio_Pin4, PORT_PIN_MODE_DIO);

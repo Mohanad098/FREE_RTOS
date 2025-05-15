@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD_trial.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD_trial.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sun May  4 22:32:42 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Thu May 15 12:58:04 2025
 <BR><P>
 <H3>Maximum Stack Usage =        292 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -51,6 +51,7 @@ Mutually Recursive functions
  <LI><a href="#[25]">COMP2_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[25]">COMP2_Handler</a><BR>
  <LI><a href="#[26]">SYSCTL_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[26]">SYSCTL_Handler</a><BR>
  <LI><a href="#[27]">FLASH_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[27]">FLASH_Handler</a><BR>
+ <LI><a href="#[28]">GPIOF_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[28]">GPIOF_Handler</a><BR>
  <LI><a href="#[29]">GPIOG_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[29]">GPIOG_Handler</a><BR>
  <LI><a href="#[2a]">GPIOH_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2a]">GPIOH_Handler</a><BR>
  <LI><a href="#[2b]">UART2_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[2b]">UART2_Handler</a><BR>
@@ -156,7 +157,7 @@ Function Pointers
  <LI><a href="#[c]">GPIOC_Handler</a> from main.o(.text.GPIOC_Handler) referenced from startup_tm4c123.o(RESET)
  <LI><a href="#[d]">GPIOD_Handler</a> from main.o(.text.GPIOD_Handler) referenced from startup_tm4c123.o(RESET)
  <LI><a href="#[e]">GPIOE_Handler</a> from startup_tm4c123.o(.text) referenced from startup_tm4c123.o(RESET)
- <LI><a href="#[28]">GPIOF_Handler</a> from main.o(.text.GPIOF_Handler) referenced from startup_tm4c123.o(RESET)
+ <LI><a href="#[28]">GPIOF_Handler</a> from startup_tm4c123.o(.text) referenced from startup_tm4c123.o(RESET)
  <LI><a href="#[29]">GPIOG_Handler</a> from startup_tm4c123.o(.text) referenced from startup_tm4c123.o(RESET)
  <LI><a href="#[2a]">GPIOH_Handler</a> from startup_tm4c123.o(.text) referenced from startup_tm4c123.o(RESET)
  <LI><a href="#[3d]">GPIOJ_Handler</a> from startup_tm4c123.o(.text) referenced from startup_tm4c123.o(RESET)
@@ -643,6 +644,13 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Handler
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FLASH_Handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
+</UL>
+<P><STRONG><a name="[28]"></a>GPIOF_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_tm4c123.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOF_Handler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOF_Handler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
 </UL>
@@ -1389,15 +1397,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
 </UL>
-<P><STRONG><a name="[d]"></a>GPIOD_Handler</STRONG> (Thumb, 238 bytes, Stack size 24 bytes, main.o(.text.GPIOD_Handler))
+<P><STRONG><a name="[d]"></a>GPIOD_Handler</STRONG> (Thumb, 360 bytes, Stack size 24 bytes, main.o(.text.GPIOD_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = GPIOD_Handler &rArr; xTaskGenericNotifyFromISR
-</UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericNotifyFromISR
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
-</UL>
-<P><STRONG><a name="[28]"></a>GPIOF_Handler</STRONG> (Thumb, 168 bytes, Stack size 24 bytes, main.o(.text.GPIOF_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = GPIOF_Handler &rArr; xTaskGenericNotifyFromISR
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericNotifyFromISR
 </UL>
@@ -1448,7 +1449,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;M_Init
 </UL>
 
-<P><STRONG><a name="[bc]"></a>H_PB_init</STRONG> (Thumb, 262 bytes, Stack size 40 bytes, hal.o(.text.H_PB_init))
+<P><STRONG><a name="[bc]"></a>H_PB_init</STRONG> (Thumb, 264 bytes, Stack size 40 bytes, hal.o(.text.H_PB_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
 <LI>Call Chain = H_PB_init &rArr; Port_SetInternalResistor &rArr; __aeabi_assert &rArr; abort &rArr; __rt_SIGABRT &rArr; __rt_SIGABRT_inner &rArr; __default_signal_display &rArr; _ttywrch
 </UL>
@@ -1475,6 +1476,7 @@ Global Symbols
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskDelay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vLCD
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vControlTask
 </UL>
 
 <P><STRONG><a name="[c4]"></a>LCD_Init</STRONG> (Thumb, 106 bytes, Stack size 24 bytes, lcd_i2c.o(.text.LCD_Init))
@@ -1770,13 +1772,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerCreateTimerTask
 </UL>
 
-<P><STRONG><a name="[78]"></a>vControlTask</STRONG> (Thumb, 278 bytes, Stack size 40 bytes, main.o(.text.vControlTask))
+<P><STRONG><a name="[78]"></a>vControlTask</STRONG> (Thumb, 282 bytes, Stack size 40 bytes, main.o(.text.vControlTask))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = vControlTask &rArr; xQueueGenericSend &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;M_MotorControl
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTaskGenericNotifyWait
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueGenericSend
 </UL>
@@ -1821,11 +1824,11 @@ Global Symbols
 <P><STRONG><a name="[7e]"></a>vLCD</STRONG> (Thumb, 316 bytes, Stack size 32 bytes, main.o(.text.vLCD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = vLCD &rArr; xQueueReceive &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetCursor
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetCursor
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xQueueReceive
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uxQueueMessagesWaiting
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Print
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u8_to_str
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text.main)
@@ -2219,8 +2222,7 @@ Global Symbols
 <P><STRONG><a name="[ae]"></a>xTaskGenericNotifyFromISR</STRONG> (Thumb, 572 bytes, Stack size 60 bytes, tasks.o(.text.xTaskGenericNotifyFromISR))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = xTaskGenericNotifyFromISR
 </UL>
-<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOF_Handler
-<LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOD_Handler
+<BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOD_Handler
 <LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOC_Handler
 <LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOA_Handler
 </UL>
@@ -2402,8 +2404,8 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_WriteNibble
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetCursor
+<BR>[Called By]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_SetCursor
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Clear
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 </UL>
 
